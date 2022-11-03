@@ -9,6 +9,8 @@ import {
   doc,
   query,
   where,
+  updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 
 import {
@@ -21,6 +23,26 @@ import {
 function App() {
   const [user, setUser] = React.useState({});
   const [loading, setLoading] = React.useState(true);
+
+
+  async function updatePost(){
+    const hardId = "MaeCNpnD4OnYx7ToQBtZ";
+    const postRef = doc(db, "posts", hardId);
+    const post = await getPostById(hardId)
+    const newPost = {
+      ...post,
+      title: "land 20k job",
+    }
+    updateDoc(postRef, newPost);
+  }
+
+
+  function deletePost(){
+    const hardId = "MaeCNpnD4OnYx7ToQBtZ";
+    const postRef = doc(db, "posts", hardId);
+    deleteDoc(postRef)
+  }
+
 
   function createPost() {
     const post = {
@@ -37,14 +59,11 @@ function App() {
     console.log(posts);
   }
 
-  async function getPostById() {
+  async function getPostById(id) {
     const hardId = "MaeCNpnD4OnYx7ToQBtZ";
-    const postRef = doc(db, "posts", hardId);
-    const postSnap = await getDoc(postRef);
-    if (postSnap.exists()) {
-      const post = postSnap.data();
-      console.log(post);
-    }
+    const postRef = doc(db, "posts", id);
+    return await getDoc(postRef);
+    
   }
 
   async function getPostByUid(){
@@ -104,6 +123,8 @@ function App() {
         <button onClick={getAllPosts}>Get Posts</button>
         <button onClick={getPostById}>Get Post by ID</button>
         <button onClick={getPostByUid}>Get Post by UID</button>
+        <button onClick={updatePost}>Update post</button>
+        <button onClick={deletePost}>Delete post</button>
       </div>
     </div>
   );
