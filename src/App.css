@@ -3,21 +3,3 @@
   padding-top: 12px;
   justify-content: space-between;
 }
-
-.loading{
-  height: 1rem;
-  width: 100%;
-  max-width: 120px;
-  background-color: lightgrey;
-  border-radius: 10px;
-  padding-top: 8px;
-}
-
-.user-icon{
-  background-color:#f88379 ;
-  color: white;
-  border: none;
-  padding: 16px;
-  font-weight: 900;
-  border-radius: 50%;
-}
